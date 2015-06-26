@@ -1,7 +1,6 @@
 <html>
 <head>
-	<script type="text/javascript"
-	        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 	        //src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQQnmFW_WBzYdyh82b7KAiSB51ipG7cVw">
 	</script>
 	<script src="./js/gmaps.js"></script>
