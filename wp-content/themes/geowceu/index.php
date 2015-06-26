@@ -7,22 +7,26 @@
 	<script src="<?php echo get_stylesheet_directory_uri();?>/js/gmaps.js"></script>
 	<script type="text/javascript">
 		function getText(){
-			//window.text = prompt('Wanna say something?');
+			window.text = localStorage.getItem("geoevent-twitter-id");
+			if(window.text == null) {
+				window.text = prompt('Input your Twitter username');
+				localStorage.setItem("geoevent-twitter-id", window.text);
+			}
 			geolocate();
 		}
 		<?php $token = md5(uniqid(mt_rand(), true));?>
 		function initialize() {
+			var mapOptions = {
+				center: { lat: -34.397, lng: 150.644},
+				zoom: 8
+			};
+			var map = new google.maps.Map(document.getElementById('map-canvas'),
+				mapOptions);
 			window.token = localStorage.getItem("geoevent-id");
 			if(token == null) {
 				localStorage.setItem("geoevent-id", "<?php echo $token;?>");
 				window.token = localStorage.getItem("geoevent-id");
 			}
-			var mapOptions = {
-				center: { lat: -34.397, lng: 150.644},
-				zoom: 9
-			};
-			var map = new google.maps.Map(document.getElementById('map-canvas'),
-				mapOptions);
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -32,7 +36,9 @@
 					map.addMarker({
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
+						icon: '<?php echo get_stylesheet_directory_uri();?>/images/markers/ffa500-marker-32.png'
 					});
+					map.setCenter(position.coords.latitude, position.coords.longitude);
 					savePos(position.coords.latitude, position.coords.longitude);
 					//savePos(position.coords.Latitude, position.coords.Longitude);
 					//return position;
@@ -61,7 +67,7 @@
 	<style>
 		body{
 			background-color: #000;
-
+			font-family: Georgia;
 		}
 
 		header{
@@ -197,9 +203,7 @@ $spots = getSpots($db);
 	map.addMarker({
 		lat: <?php echo $spot['lat']; ?>,
 		lng: <?php echo $spot['lng']; ?>,
-		click: function(e){
-			console.log('<?php echo $spot['text']; ?>');
-		}
+		icon: '<?php echo get_stylesheet_directory_uri();?>/images/markers/ffa500-marker-32.png'
 	});
 	<?php endforeach; ?>
 
