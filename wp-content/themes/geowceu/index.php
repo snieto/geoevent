@@ -1,7 +1,6 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 	</script>
@@ -151,14 +150,34 @@
 			}
 			h1{
 				background-size:50%;
+				margin-left: -225px;
 			}
 
-			h2{
-				background-size:50%;
+			h2 {
+				height: 40px;
+				width: 50px;
+
+				margin-top: 5px;
+				background-size: 100%!important;
 			}
 			#map{
 				height:70% !important;
 			}
+
+			.hastag{
+				position: absolute;
+				z-index: 1000;
+				bottom: -5px;
+				right: 27px;
+				font-size:11px;
+				width:auto;
+			}
+		    .authors{
+			    width: 70px;
+		    }
+		    footer{
+			    font-size: 80%;
+		    }
 		}
 	</style>
 </head>
