@@ -1,5 +1,6 @@
 <?php
-$db = new PDO('mysql:host=localhost;dbname=geowceu;charset=utf8', 'geowceu', 'geowceu');
+include __DIR__.'/../../../../wp-config.php';
+$db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASSWORD);
 
 function getSpots($db) {
 	$stmt = $db->query("SELECT * FROM geospots");
