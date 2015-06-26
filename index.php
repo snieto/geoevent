@@ -4,28 +4,22 @@
 	        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 	        //src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQQnmFW_WBzYdyh82b7KAiSB51ipG7cVw">
 	</script>
-	<script src="js/gmaps.js"></script>
-	<style>
-		h1{
-			font-size: 16px;
-		}
-		#map,
-		gm-master{
-			width: 80%;
-			height:500px;
-			margin: 40px auto 0;
-		}
-	</style>
+	<script src="./js/gmaps.js"></script>
 	<script type="text/javascript">
 		function getText(){
-			window.text = prompt('Wanna say something?');
+			//window.text = prompt('Wanna say something?');
 			geolocate();
 		}
-
+		<?php $token = md5(uniqid(mt_rand(), true));?>
 		function initialize() {
+			token = localStorage.getItem("geoevent-id");
+			if(token == null) {
+				localStorage.setItem("geoevent-id", "<?php echo $token;?>");
+				window.token = localStorage.getItem("geoevent-id");
+			}
 			var mapOptions = {
 				center: { lat: -34.397, lng: 150.644},
-				zoom: 8
+				zoom: 9
 			};
 			var map = new google.maps.Map(document.getElementById('map-canvas'),
 				mapOptions);
@@ -36,7 +30,6 @@
 			GMaps.geolocate({
 				success: function(position) {
 					savePos(position.coords.latitude, position.coords.longitude);
-					console.log(position);
 					//savePos(position.coords.Latitude, position.coords.Longitude);
 					//return position;
 				},
@@ -52,8 +45,11 @@
 			});
 		}
 		function savePos(lat, lng){
+			if(typeof text == 'undefined'){
+				text = '';
+			}
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("POST", "savePost.php", true);
+			xmlhttp.open("POST", "./savePost.php", true);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			xmlhttp.send("lat="+lat+"&lng="+lng+"&text="+window.text+"&token="+window.token);
 		}
@@ -71,7 +67,7 @@
 		 }
 		#map,
 		.gm-master{
-			width: 80%;
+			width: 100%;
 			height:500px;
 			margin: 40px auto 0;
 		}
