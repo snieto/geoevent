@@ -10,7 +10,7 @@
 		function getText(){
 			window.text = localStorage.getItem("geoevent-twitter-id");
 			if(window.text == null) {
-				window.text = prompt('Input your Twitter username');
+				window.text = prompt('Input your Twitter username, with or without @');
 				localStorage.setItem("geoevent-twitter-id", window.text);
 			}
 			geolocate();
