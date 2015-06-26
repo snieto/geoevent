@@ -103,8 +103,8 @@
 
 
 	</script>
+<?php		/*
 	<script>
-		/*
 		function initialize() {
 			var mapOptions = {
 				zoom: 8,
@@ -124,7 +124,7 @@
 		}
 
 		window.onload = loadScript;
-		*/
 	</script>
+		*/?>
 </body>
 </html>
