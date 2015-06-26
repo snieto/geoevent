@@ -1,5 +1,6 @@
 <html>
 <head>
+	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 		//src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQQnmFW_WBzYdyh82b7KAiSB51ipG7cVw">
 	</script>
@@ -27,7 +28,11 @@
 
 		function geolocate(){
 			GMaps.geolocate({
-				success: function(position) {
+				success: function(position){
+					map.addMarker({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					});
 					savePos(position.coords.latitude, position.coords.longitude);
 					//savePos(position.coords.Latitude, position.coords.Longitude);
 					//return position;
@@ -56,24 +61,107 @@
 	<style>
 		body{
 			background-color: #000;
+
+		}
+
+		header{
+			height:80px;
+			position: relative;
+		}
+		.hastag{
+			padding-top: 40px;
+			padding-left: 30px;
+			float: left;
+			width: 100px;
+			color: orange;
+			font-size: 25px
 		}
 		h1{
-			background: url(https://europe.wordcamp.org/2015/files/2015/02/logo.png) top center no-repeat;
-			background-color: #000;
-			height: 200px;
-			background-size: contain;
-			font-size: 16px;
+			background: url(<?php echo get_stylesheet_directory_uri();?>/images/logogeo.png) top center no-repeat;
+			font-size: 0;
+			height: 96px;
+			width:382px;
+			position: absolute;
+			left:50%;
+			margin-left: -191px;
+			margin-top: 10px;
+			background-size:80%;
 		}
+
+		h2{
+			background: url(<?php echo get_stylesheet_directory_uri();?>/images/logow.png) top center no-repeat;
+			font-size: 0;
+			height: 112px;
+			width:138px;
+			position:absolute;
+			right:20px;
+			margin-top: 10px;
+			background-size:80%;
+		}
+
 		#map,
 		.gm-master{
+			width: 100%!important;
+			height:70%;
+			margin: 30px auto 0;
+		}
+
+		footer{
+			color: #eee;
+			height: 60px;
+		}
+
+		.developed{
+			margin-top: 15px;
+		}
+		.developed .heart{
+			color: red;
+		}
+
+		.authors{
+			float: right;
+			width: 150px;
+
+		}
+		.authors a{
+			display: block;
 			width: 100%;
-			height:500px;
-			margin: 40px auto 0;
+			margin-bottom: 5px;
+		}
+
+		.github{
+			color: #eee;
+			margin-top: 15px;
+		}
+
+		footer a{
+			color: orange;
+		}
+
+		@media screen and (max-width: 767px){
+			header{
+				height: 55px;
+			}
+			h1{
+				background-size:50%;
+			}
+
+			h2{
+				background-size:50%;
+			}
+			#map{
+				height:70% !important;
+			}
 		}
 	</style>
 </head>
 <body onLoad="getText()">
-<h1>WCEU</h1>
+<header>
+<div class="hastag">#WCEU</div>
+<h1>GEOEVENT - ALPHA VERSION</h1>
+<h2>WCEU</h2>
+</header>
+
 <!--  - Where are the personas? -->
 <?php
 include __DIR__.DIRECTORY_SEPARATOR.'includes/connectDB.php';
@@ -82,6 +170,20 @@ $spots = getSpots($db);
 
 <div id="map"></div>
 <div id="map-canvas"></div>
+
+<footer>
+	<div class="authors">
+		<a href="https://twitter.com/snieto">@snieto</a>
+		<a href="https://twitter.com/juaevpa">@juaevpa</a>
+		<a href="https://twitter.com/manelio">@manelio</a>
+	</div>
+	<div class="developed">
+		Developed in Seville with <span class="heart">&#9829;</span> for you WCEU personas!
+	</div>
+	<div class="github">
+		Github: <a href="https://github.com/snieto/geoevent">https://github.com/snieto/geoevent</a>
+	</div>
+</footer>
 <script>
 	var map = new GMaps({
 		el: '#map',
@@ -103,28 +205,5 @@ $spots = getSpots($db);
 
 
 </script>
-<?php		/*
-	<script>
-		function initialize() {
-			var mapOptions = {
-				zoom: 8,
-				center: new google.maps.LatLng(-34.397, 150.644)
-			};
-
-			var map = new google.maps.Map(document.getElementById('map-canvas'),
-				mapOptions);
-		}
-
-		function loadScript() {
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-			'&signed_in=true&callback=initialize&key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY';
-			document.body.appendChild(script);
-		}
-
-		window.onload = loadScript;
-	</script>
-		*/?>
 </body>
 </html>

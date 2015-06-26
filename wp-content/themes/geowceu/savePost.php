@@ -11,10 +11,12 @@ try{
 	if(empty($spot)){
 		$stmt = $db->prepare("INSERT INTO geospots(lat, lng, text, token) VALUES(:lat,:lng,:text,:token)");
 	}else{
-		$stmt = $db->prepare("UPDATE geowceu SET lat = :lat, lng = :lng, text = :text WHERE id = ".$spot['id']);
+		$stmt = $db->prepare("UPDATE geowceu SET lat = :lat, lng = :lng, text = :text WHERE id = :id");
 	}
+	echo "UPDATE geowceu SET lat = :lat, lng = :lng, text = :text WHERE id = :id"";
 	$stmt->bindValue(':lat', $lat);
 	$stmt->bindValue(':lng', $lng);
+	$stmt->bindValue(':id', $spot['id']);
 	$stmt->bindValue(':text', $text, PDO::PARAM_STR);
 	$stmt->execute();
 
