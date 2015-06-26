@@ -166,6 +166,9 @@
 <div class="hastag">#WCEU</div>
 <h1>GEOEVENT - ALPHA VERSION</h1>
 <h2>WCEU</h2>
+
+<?php do_action( 'wordpress_social_login' ); ?>
+
 </header>
 
 <!--  - Where are the personas? -->
