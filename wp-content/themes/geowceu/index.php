@@ -2,7 +2,6 @@
 <head>
 	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
-		//src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQQnmFW_WBzYdyh82b7KAiSB51ipG7cVw">
 	</script>
 	<script src="<?php echo get_stylesheet_directory_uri();?>/js/gmaps.js"></script>
 	<script type="text/javascript">
