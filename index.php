@@ -55,9 +55,27 @@
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.open("POST", "savePost.php", true);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			xmlhttp.send("lat="+lat+"&lng="+lng+"&text="+window.text);
+			xmlhttp.send("lat="+lat+"&lng="+lng+"&text="+window.text+"&token="+window.token);
 		}
 	</script>
+	<style>
+		body{
+			background-color: #000;
+		}
+		h1{
+			background: url(https://europe.wordcamp.org/2015/files/2015/02/logo.png) top center no-repeat;
+			background-color: #000;
+			height: 200px;
+			background-size: contain;
+			font-size: 16px;
+		 }
+		#map,
+		.gm-master{
+			width: 80%;
+			height:500px;
+			margin: 40px auto 0;
+		}
+	</style>
 </head>
 <body onLoad="getText()">
 	<h1>WCEU</h1>
@@ -76,6 +94,7 @@
 			lng: -5.9964033,
 
 		});
+
 		<?php
 			foreach($spots as $spot):?>
 				map.addMarker({
