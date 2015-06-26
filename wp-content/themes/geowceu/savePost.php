@@ -16,7 +16,6 @@ try{
 	$stmt->bindValue(':lat', $lat);
 	$stmt->bindValue(':lng', $lng);
 	$stmt->bindValue(':text', $text, PDO::PARAM_STR);
-	$stmt->bindValue(':token', $token, PDO::PARAM_STR);
 	$stmt->execute();
 
 	$affected_rows = $stmt->rowCount();

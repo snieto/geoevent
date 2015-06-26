@@ -3,7 +3,7 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 		//src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQQnmFW_WBzYdyh82b7KAiSB51ipG7cVw">
 	</script>
-	<script src="./js/gmaps.js"></script>
+	<script src="<?php echo get_stylesheet_directory_uri();?>/js/gmaps.js"></script>
 	<script type="text/javascript">
 		function getText(){
 			//window.text = prompt('Wanna say something?');
@@ -48,7 +48,7 @@
 				text = '';
 			}
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("POST", "./savePost.php", true);
+			xmlhttp.open("POST", "<?php echo get_stylesheet_directory_uri();?>/savePost.php", true);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			xmlhttp.send("lat="+lat+"&lng="+lng+"&text="+window.text+"&token="+window.token);
 		}
