@@ -10,7 +10,7 @@
 		function getText(){
 			window.text = localStorage.getItem("geoevent-twitter-id");
 			if(window.text == null) {
-				window.text = prompt('Remember to reload for update your position. Now input your Twitter username, with or without @');
+				window.text = prompt('Remember to reload to update your position. Now input your Twitter username, with or without @');
 				localStorage.setItem("geoevent-twitter-id", window.text);
 			}
 			geolocate();
