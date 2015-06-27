@@ -2,6 +2,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri();?>/images/favicon.ico" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 	</script>
 	<script src="<?php echo get_stylesheet_directory_uri();?>/js/gmaps.js"></script>
@@ -9,7 +10,7 @@
 		function getText(){
 			window.text = localStorage.getItem("geoevent-twitter-id");
 			if(window.text == null) {
-				window.text = prompt('Input your Twitter username, with or without @');
+				window.text = prompt('Remember to reload for update your position. Now input your Twitter username, with or without @');
 				localStorage.setItem("geoevent-twitter-id", window.text);
 			}
 			geolocate();
@@ -18,7 +19,7 @@
 		function initialize() {
 			var mapOptions = {
 				center: { lat: -34.397, lng: 150.644},
-				zoom: 8
+				zoom: 6
 			};
 			var map = new google.maps.Map(document.getElementById('map-canvas'),
 				mapOptions);
@@ -44,7 +45,7 @@
 					//return position;
 				},
 				error: function(error) {
-					alert('Geolocation failed: '+error.message);
+					alert('Geolocation not enabled? '+error.message);
 				},
 				not_supported: function() {
 					alert("Your browser does not support geolocation");
@@ -67,10 +68,16 @@
 	<style>
 		body{
 			background-color: #000;
-			font-family: Georgia;
+			font-family: 'Lato', Georgia, sans-serif;
 		}
-
+		a{
+			text-decoration: none;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
 		header{
+			background-color: #000;
 			height:80px;
 			position: relative;
 		}
@@ -113,8 +120,9 @@
 		}
 
 		footer{
-			color: #eee;
-			height: 60px;
+			color: #ccc;
+			height: 50px;
+			padding: 10px 10px 0;
 		}
 
 		.developed{
@@ -127,7 +135,9 @@
 		.authors{
 			float: right;
 			width: 150px;
-
+			padding-top: 15px;
+			font-size: 90%;
+			line-height: 0.9em;
 		}
 		.authors a{
 			display: block;
@@ -136,8 +146,8 @@
 		}
 
 		.github{
-			color: #eee;
-			margin-top: 15px;
+			color: #ccc;
+			margin-top: 10px;
 		}
 
 		footer a{
@@ -207,7 +217,7 @@ $spots = getSpots($db);
 		<a href="https://twitter.com/manelio">@manelio</a>
 	</div>
 	<div class="developed">
-		Developed in Seville with <span class="heart">&#9829;</span> for you WCEU personas!
+		Developed in Seville with <span class="heart">&#9829;</span> for you!
 	</div>
 	<div class="github">
 		Github: <a href="https://github.com/snieto/geoevent">https://github.com/snieto/geoevent</a>
