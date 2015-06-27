@@ -65,9 +65,11 @@ $spots = getSpots($db);
 	<div class="developed">
 		Developed in Seville with <span class="heart">&#9829;</span> for you!
 	</div>
+<?php /*
 	<div class="github">
 		Github: <a href="https://github.com/snieto/geoevent">https://github.com/snieto/geoevent</a>
 	</div>
+ */ ?>
 </footer>
 <script>
 	var map = new GMaps({
