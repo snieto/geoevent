@@ -10,14 +10,18 @@
 	<script>
 		window.token = '<?php $token = md5(uniqid(mt_rand(), true));?>';
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="<?php echo get_stylesheet_directory_uri();?>/js/jquery.popup.js"></script>
+	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri();?>/js/main.js">
 </head>
 <body>
 <?php include_once(locate_template("includes/analytics-tracking.php")); ?>
 <header>
+<div class="explain">Share you location and see where other WCEU buddies are hanging out</div>
 <div class="hastag">#WCEU</div>
 <h1>GEOEVENT - ALPHA VERSION</h1>
-<h2>WCEU</h2>
-
+<h2>Where are the WCEU buddies?</h2>
+<!--<p class="claim">See where WCEU buddies are hanging out</p>-->
 <div class="animated_popup">
 	<form>
 		<h3></h3>
@@ -55,8 +59,8 @@ $spots = getSpots($db);
 ?>
 
 <div id="map"></div>
-<div id="map-canvas"></div>
 <footer>
+<!--<p class="claim2">See where WCEU buddies are hanging out</p>-->
 	<div class="authors">
 		<a href="https://twitter.com/snieto">@snieto</a>
 		<a href="https://twitter.com/juaevpa">@juaevpa</a>
@@ -76,6 +80,7 @@ $spots = getSpots($db);
 		el: '#map',
 		lat: 37.4094169,
 		lng: -5.9964033,
+		zoom: 14,
 		styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
 	});
 
@@ -91,8 +96,5 @@ $spots = getSpots($db);
 
 
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="<?php echo get_stylesheet_directory_uri();?>/js/jquery.popup.min.js"></script>
-<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri();?>/js/main.js">
 </body>
 </html>
