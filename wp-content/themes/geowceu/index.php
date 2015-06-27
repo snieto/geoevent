@@ -5,198 +5,45 @@
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvA1l3OHvvrobvCl5ldRiUqGTOzrRWbY">
 	</script>
+	<link href='<?php echo get_stylesheet_directory_uri();?>/style.css' rel='stylesheet' type='text/css'>
 	<script src="<?php echo get_stylesheet_directory_uri();?>/js/gmaps.js"></script>
-	<script type="text/javascript">
-		function getText(){
-			window.text = localStorage.getItem("geoevent-twitter-id");
-			if(window.text == null) {
-				window.text = prompt('Remember to reload to update your position. Now input your Twitter username, with or without @');
-				localStorage.setItem("geoevent-twitter-id", window.text);
-			}
-			geolocate();
-		}
-		<?php $token = md5(uniqid(mt_rand(), true));?>
-		function initialize() {
-			var mapOptions = {
-				center: { lat: -34.397, lng: 150.644},
-				zoom: 6
-			};
-			var map = new google.maps.Map(document.getElementById('map-canvas'),
-				mapOptions);
-			window.token = localStorage.getItem("geoevent-id");
-			if(token == null) {
-				localStorage.setItem("geoevent-id", "<?php echo $token;?>");
-				window.token = localStorage.getItem("geoevent-id");
-			}
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-
-		function geolocate(){
-			GMaps.geolocate({
-				success: function(position){
-					map.addMarker({
-						lat: position.coords.latitude,
-						lng: position.coords.longitude,
-						icon: '<?php echo get_stylesheet_directory_uri();?>/images/markers/ffa500-marker-32.png'
-					});
-					map.setCenter(position.coords.latitude, position.coords.longitude);
-					savePos(position.coords.latitude, position.coords.longitude);
-					//savePos(position.coords.Latitude, position.coords.Longitude);
-					//return position;
-				},
-				error: function(error) {
-					alert('Geolocation not enabled? '+error.message);
-				},
-				not_supported: function() {
-					alert("Your browser does not support geolocation");
-				},
-				always: function() {
-					//alert("Done!");
-				}
-			});
-		}
-		function savePos(lat, lng){
-			if(typeof text == 'undefined'){
-				text = '';
-			}
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("POST", "<?php echo get_stylesheet_directory_uri();?>/savePost.php", true);
-			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			xmlhttp.send("lat="+lat+"&lng="+lng+"&text="+window.text+"&token="+window.token);
-		}
+	<script>
+		window.token = '<?php $token = md5(uniqid(mt_rand(), true));?>';
 	</script>
-	<style>
-		body{
-			background-color: #000;
-			font-family: 'Lato', Georgia, sans-serif;
-		}
-		a{
-			text-decoration: none;
-		}
-		a:hover{
-			text-decoration: underline;
-		}
-		header{
-			background-color: #000;
-			height:80px;
-			position: relative;
-		}
-		.hastag{
-			padding-top: 40px;
-			padding-left: 30px;
-			float: left;
-			width: 100px;
-			color: orange;
-			font-size: 25px
-		}
-		h1{
-			background: url(<?php echo get_stylesheet_directory_uri();?>/images/logogeo.png) top center no-repeat;
-			font-size: 0;
-			height: 96px;
-			width:382px;
-			position: absolute;
-			left:50%;
-			margin-left: -191px;
-			margin-top: 10px;
-			background-size:80%;
-		}
-
-		h2{
-			background: url(<?php echo get_stylesheet_directory_uri();?>/images/logow.png) top center no-repeat;
-			font-size: 0;
-			height: 112px;
-			width:138px;
-			position:absolute;
-			right:20px;
-			margin-top: 10px;
-			background-size:80%;
-		}
-
-		#map,
-		.gm-master{
-			width: 100%!important;
-			height:70%;
-			margin: 30px auto 0;
-		}
-
-		footer{
-			color: #ccc;
-			height: 50px;
-			padding: 10px 10px 0;
-		}
-
-		.developed{
-			margin-top: 15px;
-		}
-		.developed .heart{
-			color: red;
-		}
-
-		.authors{
-			float: right;
-			width: 150px;
-			padding-top: 15px;
-			font-size: 90%;
-			line-height: 0.9em;
-		}
-		.authors a{
-			display: block;
-			width: 100%;
-			margin-bottom: 5px;
-		}
-
-		.github{
-			color: #ccc;
-			margin-top: 10px;
-		}
-
-		footer a{
-			color: orange;
-		}
-
-		@media screen and (max-width: 767px){
-			header{
-				height: 55px;
-			}
-			h1{
-				background-size:50%;
-				margin-left: -225px;
-			}
-
-			h2 {
-				height: 40px;
-				width: 50px;
-
-				margin-top: 5px;
-				background-size: 100%!important;
-			}
-			#map{
-				height:70% !important;
-			}
-
-			.hastag{
-				position: absolute;
-				z-index: 1000;
-				bottom: -5px;
-				right: 27px;
-				font-size:11px;
-				width:auto;
-			}
-		    .authors{
-			    width: 70px;
-		    }
-		    footer{
-			    font-size: 80%;
-		    }
-		}
-	</style>
 </head>
-<body onLoad="getText()">
+<body>
+<?php include_once(locate_template("includes/analytics-tracking.php")); ?>
 <header>
 <div class="hastag">#WCEU</div>
 <h1>GEOEVENT - ALPHA VERSION</h1>
 <h2>WCEU</h2>
 
+<div class="animated_popup">
+	<form>
+		<h3></h3>
+		<label for="twitter">Twitter id:</label>
+		<input type="text" name="twitter" value="">
+
+		<h3>I'm here for:</h3>
+		<ul>
+			<li>
+				be hired
+			</li>
+			<li>
+				hiring
+			</li>
+			<li>
+				networking
+			</li>
+			<li>
+				gay pride parade
+			</li>
+			<li>
+				Sex
+			</li>
+		</ul>
+	</form>
+</div>
 <?php do_action( 'wordpress_social_login' ); ?>
 
 </header>
@@ -209,7 +56,6 @@ $spots = getSpots($db);
 
 <div id="map"></div>
 <div id="map-canvas"></div>
-
 <footer>
 	<div class="authors">
 		<a href="https://twitter.com/snieto">@snieto</a>
@@ -228,19 +74,23 @@ $spots = getSpots($db);
 		el: '#map',
 		lat: 37.4094169,
 		lng: -5.9964033,
-
+		styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
 	});
 
 	<?php
-		foreach($spots as $spot):?>
+		foreach($spots as $spot):
+		?>
 	map.addMarker({
 		lat: <?php echo $spot['lat']; ?>,
 		lng: <?php echo $spot['lng']; ?>,
-		icon: '<?php echo get_stylesheet_directory_uri();?>/images/markers/ffa500-marker-32.png'
+		icon: '<?php echo get_stylesheet_directory_uri();?>/images/markers/ffa500-marker-32<?php echo $mySpot;?>.png'
 	});
 	<?php endforeach; ?>
 
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri();?>/js/jquery.popup.min.js"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri();?>/js/main.js">
 </body>
 </html>
